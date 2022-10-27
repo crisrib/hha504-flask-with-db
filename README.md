@@ -1,6 +1,8 @@
 # HHA504: flask-with-db
 Assignment 4
 
+GCP URL: http://34.170.210.164
+
 1. Setup a local DBs on your machine(s) using SQLITE
 2. Create an SQLite DB that contains a patient table and a minimum of 4 additional columns for patient details beyond what I provided (MRN, first and last name, DOB)
 3. Create these new fake patients/table using SQLalchemy;create a file called creatDB.py in your repo that contains the source code for how these patients were created
