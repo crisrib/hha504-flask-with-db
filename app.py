@@ -1,15 +1,27 @@
 # Import package
 from flask import Flask, render_template
+import sqlite3
+import os
 
+# Create flask app
 app = Flask(__name__)
 
-@app.route('/')
+# Create call database function
+def get_db_connection():
+    dir = os.getcwd() + '/Patients.db'
+    print('dir:', dir)
+    conn = sqlite3.connect(dir) ##creates connection to database
+    conn.row_factory = sqlite3.Row
+    return conn
+
+@app.route('/patients')
 def bootstrap():
-    return render_template('homeBs.html')
+    conn = get_db_connection()
+    patientListSql = conn.execute('SELECT * FROM patient_table').fetchall()
+    conn.close()
+    print('patientListSql:', patientListSql)
+    return render_template('bootstrap_example.html', listPatients=patientListSql)
 
-@app.route('/bootstrap2')
-def template():
-    return render_template('page2.html')
-
+# Ports and hosts
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=80)
